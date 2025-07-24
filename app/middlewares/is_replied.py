@@ -1,0 +1,8 @@
+from typing import List
+
+from aiogram.filters import BaseFilter
+from aiogram.types import Message
+
+class IsReplyFilter(BaseFilter):
+    async def __call__(self, message: Message):
+        return message.reply_to_message
