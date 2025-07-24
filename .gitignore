@@ -200,3 +200,4 @@ test.py
 *.session-journal
 
 db/
+characters.json

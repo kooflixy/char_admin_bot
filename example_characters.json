@@ -1,0 +1,25 @@
+{
+    "comment": "null - поля, обязательные для заполнения в настрйоках персонажа",
+
+    "settings": {
+        "DB_HOST": "",
+        "DB_PORT": "",
+        "DB_USER": "",
+        "DB_PASS": "",
+        "DB_NAME": "",
+
+        "TG_API_TOKEN": null,
+        "DP_API_TOKEN": null,
+
+        "CHAT_ID": "",
+
+        "CHARACTER_DESCRIPTION": null,
+        "CONTEXT_MESSAGES": null,
+        "BYE_MESSAGES": ["Прости, я не хочу сейчас общаться:("],
+
+        "DP_TEMPERATURE": "",
+        "DP_MAX_TOKENS": "",
+        "REPLY_CHANCE": "",
+        "DAILY_MESSAGES_LIMIT": ""
+    }
+}
