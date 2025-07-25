@@ -18,6 +18,7 @@
         "DP_API_TOKEN": "",
 
         "CHAT_ID": "",
+        "ADMIN_ID": "",
 
         "CHARACTER_DESCRIPTION": null,
         "CONTEXT_MESSAGES": null,
@@ -35,6 +36,5 @@
             "CHARACTER_DESCRIPTION": "desc",
             "CONTEXT_MESSAGES": []
         }
-
     ]
 }

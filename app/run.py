@@ -1,10 +1,8 @@
-from aiogram import Dispatcher
-
-from app.handlers import *
-from aiogram import Bot
+from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums.parse_mode import ParseMode
 
+from app.handlers import *
 from config import settings
 
 bot = Bot(

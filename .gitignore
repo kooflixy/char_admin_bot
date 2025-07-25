@@ -201,3 +201,4 @@ test.py
 
 db/
 characters.json
+compose.yml
