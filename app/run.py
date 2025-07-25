@@ -16,7 +16,8 @@ async def run():
 
     # fmt: off
     dp.include_routers(
-        post.router
+        post.router,
+        stats.router
     )
     # fmt: on
 
