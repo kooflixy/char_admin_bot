@@ -66,6 +66,31 @@ if settings["adminer"]:
     depends_on:
       - postgres"""
 
+if settings["ADMIN_BOT_TG_API_TOKEN"]:
+    file_text += f"""
+  char_admin:
+    build: {ADMIN_BOT_PATH}
+    image: admin_bot
+    container_name: char_admin_bot
+    restart: unless-stopped
+    command: sh -c "while ! nc -z postgres 5432; do sleep 1; done && alembic upgrade head && python main.py"
+    environment: 
+      - DB_HOST={settings["DB_HOST"]}
+      - DB_PORT={settings["DB_PORT"]}
+      - DB_USER={settings["DB_USER"]}
+      - DB_PASS={settings["DB_PASS"]}
+      - DB_NAME={settings["DB_NAME"]}
+      - TG_API_TOKEN={settings["ADMIN_BOT_TG_API_TOKEN"]}
+      - ADMIN_ID={settings["ADMIN_ID"]}
+    links:
+      - "postgres:dbps"
+    networks:
+      - dbnet
+    volumes:
+      - {CHAR_BOT_PATH}db:/app/db
+    depends_on:
+      - postgres"""
+
 for character in all_characters_settings:
     env_text = ""
     for key, sett in character.items():
@@ -88,10 +113,8 @@ for character in all_characters_settings:
       - "postgres:dbps"
     networks:
       - dbnet
-    volumes:
-      - ./:/app/db/data
     depends_on:
-      - postgres"""
+      - char_admin"""
 
 file_text += f"""
 networks:
