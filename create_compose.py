@@ -3,8 +3,8 @@ import os
 from typing import Any
 
 SETTINGS_PATH = "characters.json"
-CHAR_BOT_PATH = "../charbot/"
-ADMIN_BOT_PATH = "."
+CHAR_BOT_PATH = "./charbot/"
+ADMIN_BOT_PATH = "./char_admin_bot/"
 
 if not os.path.exists(SETTINGS_PATH):
     raise ImportError(f"Файл {SETTINGS_PATH} не найден")
