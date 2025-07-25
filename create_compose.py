@@ -91,7 +91,7 @@ if settings["ADMIN_BOT_TG_API_TOKEN"]:
     depends_on:
       - postgres"""
 
-for character in all_characters_settings:
+for ind, character in enumerate(all_characters_settings):
     env_text = ""
     for key, sett in character.items():
         if key == "name":
@@ -103,7 +103,7 @@ for character in all_characters_settings:
 
     file_text += f"""
   {character["name"]}_char:
-    build: {CHAR_BOT_PATH}
+    {f"build: {CHAR_BOT_PATH}" if ind == 0 else ''}
     image: char_bot
     container_name: {character["name"]}_bot
     restart: unless-stopped
