@@ -2,6 +2,12 @@
     "comment": "null - поля, обязательные для заполнения в настрйоках персонажа",
 
     "settings": {
+        "exclude_keys": ["adminer"],
+
+        "adminer": false,
+
+        "name": null,
+
         "DB_HOST": "",
         "DB_PORT": "",
         "DB_USER": "",
@@ -9,7 +15,7 @@
         "DB_NAME": "",
 
         "TG_API_TOKEN": null,
-        "DP_API_TOKEN": null,
+        "DP_API_TOKEN": "",
 
         "CHAT_ID": "",
 
@@ -21,5 +27,14 @@
         "DP_MAX_TOKENS": "",
         "REPLY_CHANCE": "",
         "DAILY_MESSAGES_LIMIT": ""
-    }
+    },
+    "characters": [
+        {
+            "name": "name",
+            "TG_API_TOKEN": "token",
+            "CHARACTER_DESCRIPTION": "desc",
+            "CONTEXT_MESSAGES": []
+        }
+
+    ]
 }
