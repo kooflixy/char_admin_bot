@@ -1,3 +1,4 @@
+from datetime import datetime
 from logging import getLogger
 
 from aiogram import Router
@@ -41,3 +42,33 @@ async def give_premium(message: Message, command: CommandObject):
         await message.reply(
             f'Пользователю {user.first_name} выдан премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M:%S")} МСК'
         )
+
+
+@router.message(Command("premium_list"), IsAdminFilter(settings.ADMIN_ID))
+async def get_premium_list(message: Message, command: CommandObject):
+    async with async_session_factory() as session:
+        premium_records_list = await PremiumUsersORMHandler.get_all_current(session)
+
+    text_list = [
+        f"Количество: {len(premium_records_list)}\n",
+        "💳Список премиум пользователей:\n",
+    ]
+
+    for ind, premium_record in enumerate(premium_records_list):
+        local_until_date = utc_to_local(premium_record.until_date)
+
+        user = await TelethonManager.get_user(premium_record.user_id)
+
+        str_ = f"🌟Пользователь: <code>{user.first_name}</code>\n"
+        str_ += f"\tID: <code>{premium_record.user_id}</code>\n"
+        str_ += f'\tДо: {local_until_date.strftime("%Y-%m-%d %H:%M:%S")} МСК\n'
+        text_list.append(str_)
+
+        if not ind % 20 and ind:
+            str_ = "\n".join(text_list)
+            await message.reply(str_)
+            text_list = []
+
+    if not len(premium_records_list) or ind % 20:
+        str_ = "\n".join(text_list)
+        await message.reply(str_)
