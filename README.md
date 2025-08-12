@@ -7,4 +7,5 @@ copy ./characters.json ./char_admin_bot/
 cd ./char_admin_bot/
 python create_compose.py
 move compose.yml ..
+cd ..
 ```
