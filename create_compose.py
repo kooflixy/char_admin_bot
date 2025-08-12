@@ -82,6 +82,8 @@ if settings["ADMIN_BOT_TG_API_TOKEN"]:
       - DB_NAME={settings["DB_NAME"]}
       - TG_API_TOKEN={settings["ADMIN_BOT_TG_API_TOKEN"]}
       - ADMIN_ID={settings["ADMIN_ID"]}
+      - TELETHON_API_ID={settings["TELETHON_API_ID"]}
+      - TELETHON_API_HASH={settings["TELETHON_API_HASH"]}
     links:
       - "postgres:dbps"
     networks:

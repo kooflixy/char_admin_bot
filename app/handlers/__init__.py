@@ -1,1 +1,1 @@
-from app.handlers import post, stats
+from app.handlers import post, premium, stats

@@ -50,6 +50,9 @@ class Settings(BaseModel):
         f"postgresql+psycopg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
 
+    TELETHON_API_ID: str = os.getenv("TELETHON_API_ID")
+    TELETHON_API_HASH: str = os.getenv("TELETHON_API_HASH")
+
     TG_API_TOKEN: str = os.getenv("TG_API_TOKEN")
 
     ADMIN_ID: int = int(os.getenv("ADMIN_ID"))

@@ -14,6 +14,9 @@
         "DB_PASS": "",
         "DB_NAME": "",
 
+        "TELETHON_API_ID": "",
+        "TELETHON_API_HASH": "",
+
         "ADMIN_BOT_TG_API_TOKEN": "",
         "TG_API_TOKEN": null,
         "DP_API_TOKEN": "",

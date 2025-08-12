@@ -3,11 +3,11 @@ from logging import getLogger
 from aiogram import Router
 from aiogram.filters import Command, CommandObject
 from aiogram.types import Message
-from db import async_session_factory
-from db.orm.logs import LogsORMHandler
 
 from app.middlewares.is_admin import IsAdminFilter
 from config import settings
+from db import async_session_factory
+from db.orm.logs import LogsORMHandler
 
 log = getLogger(__name__)
 
