@@ -83,6 +83,6 @@ async def get_premium_list(message: Message, command: CommandObject):
             await message.reply(str_)
             text_list = []
 
-    if not len(premium_records_list) or ind % 20:
+    if not len(premium_records_list) or not ind or ind % 20:
         str_ = "\n".join(text_list)
         await message.reply(str_)
