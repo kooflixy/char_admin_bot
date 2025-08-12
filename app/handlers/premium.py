@@ -46,14 +46,15 @@ async def give_premium(message: Message, command: CommandObject):
 
     characters = JSONManager.get_json("characters.json")["characters"]
     for char in characters:
-        bot = Bot(token=char["TG_API_TOKEN"])
-        try:
-            await bot.send_message(
-                user_id,
-                f'🎉Поздравляем, Вы активировали премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК',
-            )
-        except:
-            pass
+        async with Bot(token=char["TG_API_TOKEN"]) as bot:
+            try:
+                await bot.send_message(
+                    user_id,
+                    f'🎉Поздравляем, Вы активировали премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК',
+                )
+                await bot.close()
+            except:
+                pass
     log.info('Был дан премиум premium_user_id=%s', user_id)
 
 
