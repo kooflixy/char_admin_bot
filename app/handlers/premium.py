@@ -1,11 +1,12 @@
 from datetime import datetime
 from logging import getLogger
 
-from aiogram import Router
+from aiogram import Bot, Router
 from aiogram.filters import Command, CommandObject
 from aiogram.types import Message
 
 from app.middlewares.is_admin import IsAdminFilter
+from app.utils.data_manager import JSONManager
 from config import settings
 from db import async_session_factory
 from db.orm.premium_users import PremiumUsersORMHandler
@@ -40,8 +41,19 @@ async def give_premium(message: Message, command: CommandObject):
         await session.commit()
         await session.refresh(premium_record)
         await message.reply(
-            f'Пользователю {user.first_name} выдан премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M:%S")} МСК'
+            f'Пользователю {user.first_name} выдан премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК'
         )
+
+    characters = JSONManager.get_json("characters.json")["characters"]
+    for char in characters:
+        bot = Bot(token=char["TG_API_TOKEN"])
+        try:
+            await bot.send_message(
+                user_id,
+                f'🎉Поздравляем, Вы активировали премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК',
+            )
+        except:
+            pass
 
 
 @router.message(Command("premium_list"), IsAdminFilter(settings.ADMIN_ID))
@@ -61,7 +73,7 @@ async def get_premium_list(message: Message, command: CommandObject):
 
         str_ = f"🌟Пользователь: <code>{user.first_name}</code>\n"
         str_ += f"\tID: <code>{premium_record.user_id}</code>\n"
-        str_ += f'\tДо: {local_until_date.strftime("%Y-%m-%d %H:%M:%S")} МСК\n'
+        str_ += f'\tДо: {local_until_date.strftime("%Y-%m-%d %H:%M")} МСК\n'
         text_list.append(str_)
 
         if not ind % 20 and ind:
