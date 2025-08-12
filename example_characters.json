@@ -36,7 +36,8 @@
         "DP_TEMPERATURE": "",
         "DP_MAX_TOKENS": "",
         "REPLY_CHANCE": "",
-        "DAILY_MESSAGES_LIMIT": ""
+        "DAILY_MESSAGES_LIMIT": "",
+        "PREMIUM_DAILY_MESSAGES_LIMIT": ""
     },
     "characters": [
         {
