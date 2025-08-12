@@ -30,18 +30,12 @@ async def give_premium(message: Message, command: CommandObject):
         await message.answer("Количество дней не может быть меньше нуля или равно ему")
         return
 
-    user = await TelethonManager.get_user(user_id)
-
-    if not user:
-        await message.reply(f"Пользователя {user_id!r} не существует")
-        return
-
     async with async_session_factory() as session:
         premium_record = await PremiumUsersORMHandler.insert(session, user_id, days)
         await session.commit()
         await session.refresh(premium_record)
         await message.reply(
-            f'Пользователю {user.first_name} выдан премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК'
+            f'Пользователю {user_id} выдан премиум до {utc_to_local(premium_record.until_date).strftime("%Y-%m-%d %H:%M")} МСК'
         )
 
     characters = JSONManager.get_json("characters.json")["characters"]
