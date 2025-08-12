@@ -54,6 +54,7 @@ async def give_premium(message: Message, command: CommandObject):
             )
         except:
             pass
+    log.info('Был дан премиум premium_user_id=%s', user_id)
 
 
 @router.message(Command("premium_list"), IsAdminFilter(settings.ADMIN_ID))
