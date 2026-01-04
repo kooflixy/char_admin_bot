@@ -94,9 +94,12 @@ if settings["ADMIN_BOT_TG_API_TOKEN"]:
       - postgres"""
 
 for ind, character in enumerate(all_characters_settings):
+    if not character["is_active"]:
+        continue
+
     env_text = ""
     for key, sett in character.items():
-        if key == "name":
+        if key in ["name", "key"]:
             continue
         if isinstance(sett, list):
             env_text += f"\n      - {key}={json.dumps(sett, ensure_ascii=False)}"
