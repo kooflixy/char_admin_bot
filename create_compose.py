@@ -108,11 +108,11 @@ for ind, character in enumerate(all_characters_settings):
     deploy_text = f'''
       resources:
         limits:
-          cpus: "{character["limits"].get('cpus')}"
-          memory: "{character["limits"].get('memory')}"
+          cpus: {character["limits"].get('cpus') if character["limits"].get('cpus') else 'none'}
+          memory: {character["limits"].get('memory') if character["limits"].get('memory') else 'none'}
         reservations:
-          cpus: "{character["reservations"].get('cpus')}"
-          memory: "{character["reservations"].get('memory')}"'''
+          cpus: {character["reservations"].get('cpus') if character["reservations"].get('cpus') else 'none'}
+          memory: {character["reservations"].get('memory') if character["reservations"].get('memory') else 'none'}'''
     # if character["limits"]["cpus"] or character["limits"]["memory"] or character["reservations"]["cpus"] or character["reservations"]["memory"]:
 
     file_text += f"""
