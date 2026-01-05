@@ -5,14 +5,7 @@
         "exclude_keys": ["adminer"],
 
         "adminer": false,
-        "limits": {
-            "cpus": null,
-            "memory": "100M"
-        },
-        "reservations": {
-            "cpus": null,
-            "memory": null
-        },
+        "mem_limit": "100M",
 
         "name": null,
         "is_active": true,
