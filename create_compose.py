@@ -105,13 +105,13 @@ for ind, character in enumerate(all_characters_settings):
             env_text += f"\n      - {key}={json.dumps(sett, ensure_ascii=False)}"
         else:
             env_text += f"\n      - {key}={sett}"
-    deploy_text = f"""
+    deploy_text = f'''
       limits:
-        cpus: {character["limits"].get('cpus') if character["limits"].get('cpus') else 'none'}
-        memory: {character["limits"].get('memory')}
+        cpus: "{character["limits"].get('cpus')}"
+        memory: "{character["limits"].get('memory')}"
       reservations:
-        cpus: {character["reservations"].get('cpus')}
-        memory: {character["reservations"].get('memory')}"""
+        cpus: "{character["reservations"].get('cpus')}"
+        memory: "{character["reservations"].get('memory')}"'''
     # if character["limits"]["cpus"] or character["limits"]["memory"] or character["reservations"]["cpus"] or character["reservations"]["memory"]:
 
     file_text += f"""
