@@ -99,12 +99,20 @@ for ind, character in enumerate(all_characters_settings):
 
     env_text = ""
     for key, sett in character.items():
-        if key in ["name", "key"]:
+        if key in ["name", "key", "limits", "reservations"]:
             continue
         if isinstance(sett, list):
             env_text += f"\n      - {key}={json.dumps(sett, ensure_ascii=False)}"
         else:
             env_text += f"\n      - {key}={sett}"
+    deploy_text = f"""
+      limits:
+        cpus: {character["limits"].get('cpus') if character["limits"].get('cpus') else 'none'}
+        memory: {character["limits"].get('memory')}
+      reservations:
+        cpus: {character["reservations"].get('cpus')}
+        memory: {character["reservations"].get('memory')}"""
+    # if character["limits"]["cpus"] or character["limits"]["memory"] or character["reservations"]["cpus"] or character["reservations"]["memory"]:
 
     file_text += f"""
   {character["name"]}_char:
@@ -114,6 +122,7 @@ for ind, character in enumerate(all_characters_settings):
     restart: unless-stopped
     command: sh -c "while ! nc -z postgres 5432; do sleep 1; done && alembic upgrade head && python main.py"
     environment: {env_text}
+    deploy: {deploy_text}
     links:
       - "postgres:dbps"
     networks:

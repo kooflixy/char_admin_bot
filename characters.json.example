@@ -5,8 +5,17 @@
         "exclude_keys": ["adminer"],
 
         "adminer": false,
+        "limits": {
+            "cpus": null,
+            "memory": "100M"
+        },
+        "reservations": {
+            "cpus": null,
+            "memory": null
+        },
 
         "name": null,
+        "is_active": true,
 
         "DB_HOST": "",
         "DB_PORT": "",
